@@ -169,6 +169,7 @@ export default () => {
       setLat(route[route.length - 1][1])
       setLong(route[route.length - 1][0])
       setActive(false)
+      setSpeed(0)
     } else {
       const leg_dist = new_dist - route[leg][2]
       const new_point = intermediatePoint(
@@ -239,11 +240,16 @@ export default () => {
         const time_now = firebase.firestore.Timestamp.fromDate(new Date())
         if (time_now - cur_data.timestamp < 240) {
           setActive(cur_data.active)
+          if (cur_data.active){
+            setSpeed(cur_data.speed)
+          } else {
+            setSpeed(0)
+          }
         } else {
           setActive(false)
+          setSpeed(0)
         }
         setDist(cur_data.dist)
-        setSpeed(cur_data.speed)
         setTick(cur_data.tick)
         setStartTick(cur_data.start_tick)
         setCurStage(cur_data.cur_stage)
