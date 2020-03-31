@@ -145,13 +145,13 @@ export default () => {
     return stgs
   }
 
+  // eslint-disable-next-line
   const [route, setRoute] = useState(() => createRoute())
   const [lat, setLat] = useState(route[0][1])
   const [long, setLong] = useState(route[0][0])
   const [dist, setDist] = useState(0)
   const [tick, setTick] = useState(0)
   const [curStage, setCurStage] = useState(0)
-  const [curLeg, setCurLeg] = useState(-1)
   const [legDirection, setLegDirection] = useState('east')
   const [startTick, setStartTick] = useState(0)
   const [speed, setSpeed] = useState(0)
@@ -164,7 +164,6 @@ export default () => {
     setDist(new_dist)
     setTick(new_tick)
     const leg = route.findIndex((element) => element[2] > new_dist) - 1
-    setCurLeg(leg)
     if (leg === -2) {
       // Past the end of the route
       setLat(route[route.length - 1][1])
@@ -230,10 +229,10 @@ export default () => {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     const unsubscribe = stat_doc.onSnapshot((snapshot) => {
       if (snapshot.size) {
         const cur_data = snapshot.docs[0].data()
-        console.log(cur_data)
         // Only set active to cur_data.active if less than four minutes have elapsed
         // since last Firestore update - guards against errors due to walk not being
         // stopped on main app - else assume that we are inactive.
@@ -257,7 +256,6 @@ export default () => {
         // Calculate current position
 
         const leg = route.findIndex((element) => element[2] > cur_data.dist) - 1
-        setCurLeg(leg)
         if (leg === -2) {
           // Past the end of the route
           setLat(route[route.length - 1][1])
@@ -283,15 +281,15 @@ export default () => {
             setLegDirection('west')
           }
         }
-
       } else {
         console.log('Snapshot has no data')
       }
     })
+  // eslint-disable-next-line
   }, [stat_doc])
 
   return (
-    <div>
+    <div id="container">
       <div id="map_area">
         <Map
           id="full_map"
@@ -336,7 +334,7 @@ export default () => {
       </div>
       <div id="summary_area">
         <div id="summary_stats">
-          <h1 className="summary_title">SIFT's Virtual Walk</h1>
+          <h1 className="summary_title">SIFT's Virtual Nicaragua Walk</h1>
           <div id="total_dist" className="summary_row">
             <div className="md_summary">Distance: </div>
             <div className="lg_summary">
@@ -353,9 +351,10 @@ export default () => {
           </div>
           <h2 className="sponsor_details">
             Please{' '}
-            <a href="https://uk.virginmoneygiving.com/TheCardiganWay">
-              sponsor Graham!
+            <a href="https://uk.virginmoneygiving.com/NicaraguaWalk">
+              find out more and sponsor Graham
             </a>
+            !
           </h2>
         </div>
         <div id="monitor">
@@ -363,7 +362,9 @@ export default () => {
             <div className="locn_desc">Destination</div>
             <div className="locn_time">Time on stage</div>
             <div className="locn_dist">Stage distance</div>
-            <div className="locn_dist">Remaining</div>
+            <div className="locn_rem" style={{ textAlign: 'center' }}>
+              Distance left
+            </div>
           </div>
           {stages.map((stage, index) => {
             let class_n = 'table_row'
@@ -385,7 +386,7 @@ export default () => {
                 <div className="locn_dist">
                   {formatDistAsMetres(stage.stage_d)}
                 </div>
-                <div className="locn_dist">{formatDistAsMetres(stage_r)}</div>
+                <div className="locn_rem">{formatDistAsMetres(stage_r)}</div>
               </div>
             )
           })}
