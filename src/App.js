@@ -9,7 +9,7 @@ import {
 } from 'react-leaflet'
 import './App.css'
 import { waypoints } from './route.json'
-import { features } from './Managua_to_San_Juan_del_Sur.json'
+import { features } from './Managua_to_Costa_Rica.json'
 import L from 'leaflet'
 
 // Firebase configuration
@@ -226,6 +226,15 @@ export default () => {
     return time_str
   }
 
+  const formatShortTime = (seconds) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    const time_str =
+      mins.toString().padStart(2, 0) +
+      ':' +
+      secs.toString().padStart(2, 0)
+    return time_str
+
   const formatDistAsMetres = (metres) => {
     return metres.toLocaleString('en') + 'm'
   }
@@ -389,7 +398,7 @@ export default () => {
             return (
               <div key={index} className={`${class_n}`}>
                 <div className="locn_desc">{stage.location}</div>
-                <div className="locn_time">{formatTime(stage.stage_t)}</div>
+                <div className="locn_time">{formatShortTime(stage.stage_t)}</div>
                 <div className="locn_dist">
                   {formatDistAsMetres(stage.stage_d)}
                 </div>
@@ -413,6 +422,6 @@ function getGeoJSON() {
   return {
     type: 'FeatureCollection',
     features: features,
-    name: 'Managua to San Juan del Sur'
+    name: 'Managua to Costa Rica'
   }
 }
