@@ -234,6 +234,7 @@ export default () => {
       ':' +
       secs.toString().padStart(2, 0)
     return time_str
+  }
 
   const formatDistAsMetres = (metres) => {
     return metres.toLocaleString('en') + 'm'
