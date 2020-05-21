@@ -39,7 +39,7 @@ body {
   height: 25vh;
   position: absolute;
   top: 8px;
-  left: 8px;
+  left: 58px;
   border: 2px solid purple;
   z-index: 10000;
 }
@@ -49,7 +49,7 @@ body {
   height: 25vh;
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 60px;
 }
 
 #summary_area {

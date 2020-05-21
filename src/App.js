@@ -158,6 +158,7 @@ export default () => {
   const [speed, setSpeed] = useState(0)
   const [active, setActive] = useState(false)
   const [stages, setStages] = useState(populateStages())
+  const summaryMapRef = useRef(null)
 
   const nextWalkFrame = () => {
     const new_dist = dist + (speed * 1000) / 3600 // Assumes 1 fps
@@ -305,6 +306,12 @@ export default () => {
   // eslint-disable-next-line
   }, [stat_doc])
 
+  const onMove = (event) => {
+    if (summaryMapRef.current.viewport.center !== undefined){
+      summaryMapRef.current.leafletElement.setView(event.target.getCenter(), 9)
+    }
+  }
+
   return (
     <div id="container">
       <div id="map_area">
@@ -312,11 +319,12 @@ export default () => {
           id="full_map"
           center={[lat, long]}
           zoom={17}
-          dragging={false}
-          keyboard={false}
-          scrollWheelZoom={false}
-          zoomControl={false}
+          dragging={true}
+          keyboard={true}
+          scrollWheelZoom={true}
+          zoomControl={true}
           doubleClickZoom={false}
+          onmoveend={onMove.bind(this)}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -333,6 +341,7 @@ export default () => {
         <div id="summary_border"></div>
         <Map
           id="summary_map"
+          ref={summaryMapRef}
           center={[lat, long]}
           zoom={9}
           dragging={false}
