@@ -9,7 +9,7 @@ import {
 } from 'react-leaflet'
 import './App.css'
 import { waypoints } from './route.json'
-import { features } from './Managua_to_Costa_Rica.json'
+import { features } from './Panamerican_North.json'
 import L from 'leaflet'
 
 // Firebase configuration
@@ -307,9 +307,9 @@ export default () => {
   }, [stat_doc])
 
   const onMove = (event) => {
-    if (summaryMapRef.current.viewport.center !== undefined){
-      summaryMapRef.current.leafletElement.setView(event.target.getCenter(), 9)
-    }
+    // if (summaryMapRef.current.viewport.center !== undefined){
+    summaryMapRef.current.leafletElement.setView(event.target.getCenter(), 9)
+    // }
   }
 
   return (
@@ -432,6 +432,6 @@ function getGeoJSON() {
   return {
     type: 'FeatureCollection',
     features: features,
-    name: 'Managua to Costa Rica'
+    name: 'Managua to Honduras'
   }
 }
