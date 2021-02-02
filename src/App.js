@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {
-  Map,
-  GeoJSON,
-  TileLayer,
-  Circle,
-  Marker,
-  ScaleControl
-} from 'react-leaflet'
+import { Map, GeoJSON, TileLayer, Circle, Marker, Popup } from 'react-leaflet'
 import './App.css'
 import { waypoints } from './route.json'
-import { features } from './Panamerican_North.json'
+import { features } from './Ometepe_100_mile_route.json'
+import { photos, photo_spans } from './Popup_Photos.json'
 import L from 'leaflet'
 
 // Firebase configuration
@@ -19,6 +13,16 @@ import 'firebase/firestore'
 initFirebase()
 const db = firebase.firestore()
 const stat_doc = db.collection('walk-updates')
+
+let initial_load = true
+
+let DefaultIcon = L.icon({
+  iconUrl: './icons8-image-48.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 26]
+})
+
+L.Marker.prototype.options.icon = DefaultIcon
 
 function useInterval(callback, delay) {
   const savedCallback = useRef()
@@ -146,6 +150,15 @@ export default () => {
     return stgs
   }
 
+  const calcCurrentPhoto = (leg) => {
+    const p_idx = photo_spans.findIndex(
+      (span) => leg >= span.start && leg < span.end
+    )
+    const p_id = p_idx !== -1 ? photo_spans[p_idx].id : -1
+    console.log(p_id)
+    setCurrentPhoto(p_id)
+  }
+
   // eslint-disable-next-line
   const [route, setRoute] = useState(() => createRoute())
   const [lat, setLat] = useState(route[0][1])
@@ -158,6 +171,7 @@ export default () => {
   const [speed, setSpeed] = useState(0)
   const [active, setActive] = useState(false)
   const [stages, setStages] = useState(populateStages())
+  const [currentPhoto, setCurrentPhoto] = useState(-1)
   const summaryMapRef = useRef(null)
 
   const nextWalkFrame = () => {
@@ -189,6 +203,7 @@ export default () => {
         // This is the first tick of a new stage
         setCurStage(curStage + 1)
         setStartTick(new_tick)
+        calcCurrentPhoto(leg)
       }
       const new_stages = [
         ...stages.slice(0, curStage),
@@ -213,6 +228,27 @@ export default () => {
     }
   }, 1000)
 
+  // Scroll destination list to current route leg on first load only
+  useEffect(() => {
+    if (document.getElementsByClassName('table_row current_row').length > 0) {
+      console.log('Here')
+      document
+        .getElementsByClassName('table_row current_row')[0]
+        .scrollIntoView()
+    }
+  }, [])
+
+  useEffect(() => {
+    function handleResize() {
+      if (document.getElementsByClassName('table_row current_row').length > 0) {
+        document
+          .getElementsByClassName('table_row current_row')[0]
+          .scrollIntoView()
+      }
+    }
+    window.addEventListener('resize', handleResize)
+  })
+
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600)
     const hour_rem = seconds % 3600
@@ -231,9 +267,7 @@ export default () => {
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     const time_str =
-      mins.toString().padStart(2, 0) +
-      ':' +
-      secs.toString().padStart(2, 0)
+      mins.toString().padStart(2, 0) + ':' + secs.toString().padStart(2, 0)
     return time_str
   }
 
@@ -252,7 +286,7 @@ export default () => {
         const time_now = firebase.firestore.Timestamp.fromDate(new Date())
         if (time_now - cur_data.timestamp < 240) {
           setActive(cur_data.active)
-          if (cur_data.active){
+          if (cur_data.active) {
             setSpeed(cur_data.speed)
           } else {
             setSpeed(0)
@@ -299,16 +333,27 @@ export default () => {
             setLegDirection('west')
           }
         }
+        if (initial_load) {
+          if (
+            document.getElementsByClassName('table_row current_row').length > 0
+          ) {
+            document
+              .getElementsByClassName('table_row current_row')[0]
+              .scrollIntoView()
+            calcCurrentPhoto(leg)
+          }
+          initial_load = false
+        }
       } else {
         console.log('Snapshot has no data')
       }
     })
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [stat_doc])
 
   const onMove = (event) => {
     // if (summaryMapRef.current.viewport.center !== undefined){
-    summaryMapRef.current.leafletElement.setView(event.target.getCenter(), 9)
+    summaryMapRef.current.leafletElement.setView(event.target.getCenter(), 11)
     // }
   }
 
@@ -328,22 +373,64 @@ export default () => {
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors &bull; <a target="_blank" href="https://icons8.com/icons/set/walking">Walking icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>'
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors &bull; <a target="_blank" href="https://icons8.com/icons/set/walking">Walking</a>, <a target="_blank" href="https://icons8.com/icons/set/image">Image</a> icons by <a target="_blank" href="https://icons8.com">Icons8</a>'
           />
-          <ScaleControl />
           <GeoJSON data={getGeoJSON()} style={styleRoute} />
           {legDirection === 'east' ? (
             <Marker position={[lat, long]} icon={walkingEastIcon}></Marker>
           ) : (
             <Marker position={[lat, long]} icon={walkingWestIcon}></Marker>
           )}
+          {photos.map((photo) => {
+            return (
+              <Marker zIndexOffset={15000} position={photo.coordinates}>
+                <Popup>
+                  <div>
+                    <div className="popup_header">
+                      <div>
+                        <a
+                          href={photo.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <img
+                            className="popup_icon"
+                            alt=""
+                            width={16}
+                            height={16}
+                            src="./icons8-image-48.png"
+                          />
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href={photo.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <span className="popup_caption">{photo.caption}</span>
+                        </a>
+                      </div>
+                    </div>
+                    <img
+                      className="popup_photo"
+                      src={photo.url}
+                      height="auto"
+                      width="400"
+                      alt=""
+                    />
+                  </div>
+                </Popup>
+              </Marker>
+            )
+          })}
         </Map>
         <div id="summary_border"></div>
         <Map
           id="summary_map"
           ref={summaryMapRef}
           center={[lat, long]}
-          zoom={9}
+          zoom={11}
           dragging={false}
           keyboard={false}
           scrollWheelZoom={false}
@@ -357,10 +444,40 @@ export default () => {
           <GeoJSON data={getGeoJSON()} style={styleRoute} />
           <Circle center={[lat, long]} radius="10" />
         </Map>
+        <div className="close_photo">
+          {currentPhoto > -1 ? (
+            <>
+              <span className="caption">
+                {
+                  photos[photos.findIndex((item) => item.id === currentPhoto)]
+                    .caption
+                }
+              </span>
+              <a
+                href={
+                  photos[photos.findIndex((item) => item.id === currentPhoto)]
+                    .url
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={
+                    photos[photos.findIndex((item) => item.id === currentPhoto)]
+                      .url
+                  }
+                  alt=""
+                />
+              </a>
+            </>
+          ) : (
+            <span></span>
+          )}
+        </div>
       </div>
       <div id="summary_area">
         <div id="summary_stats">
-          <h1 className="summary_title">SIFT's Virtual Nicaragua Walk</h1>
+          <h1 className="summary_title">SIFT's Ometepe Odyssey</h1>
           <div id="total_dist" className="summary_row">
             <div className="md_summary">Distance: </div>
             <div className="lg_summary">
@@ -397,9 +514,9 @@ export default () => {
             let stage_r = stage.stage_d
             if (stage.total_d >= dist && dist > stage.total_d - stage.stage_d) {
               if (active === true) {
-                class_n = 'table_row active'
+                class_n = 'table_row current_row active'
               } else {
-                class_n = 'table_row inactive'
+                class_n = 'table_row current_row inactive'
               }
               stage_r = parseInt(stage.total_d - dist)
             } else if (dist > stage.total_d) {
@@ -408,7 +525,9 @@ export default () => {
             return (
               <div key={index} className={`${class_n}`}>
                 <div className="locn_desc">{stage.location}</div>
-                <div className="locn_time">{formatShortTime(stage.stage_t)}</div>
+                <div className="locn_time">
+                  {formatShortTime(stage.stage_t)}
+                </div>
                 <div className="locn_dist">
                   {formatDistAsMetres(stage.stage_d)}
                 </div>

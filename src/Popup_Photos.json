@@ -1,0 +1,909 @@
+{
+  "photos": [
+    {
+      "coordinates": [11.540017, -85.701492],
+      "caption": "Arriving at Moyogalpa Port",
+      "url": "./photos/00.JPG",
+      "id": 0
+    },
+    {
+      "coordinates": [11.539766, -85.701433],
+      "caption": "Arriving at Moyogalpa Port",
+      "url": "./photos/01.JPG",
+      "id": 1
+    },
+    {
+      "coordinates": [11.589774, -85.642761],
+      "caption": "Concepcion volcano from near San Marcos",
+      "url": "./photos/02.JPG",
+      "id": 2
+    },
+    {
+      "coordinates": [11.572002, -85.605278],
+      "caption": "Concepcion volcano from near San José del Norte",
+      "url": "./photos/03.JPG",
+      "id": 3
+    },
+    {
+      "coordinates": [11.586848, -85.587949],
+      "caption": "Fishing boat at Puerto de Gracias",
+      "url": "./photos/04.JPG",
+      "id": 4
+    },
+    {
+      "coordinates": [11.569266, -85.578215],
+      "caption": "Altagracia hospital",
+      "url": "./photos/05.JPG",
+      "id": 5
+    },
+    {
+      "coordinates": [11.566008, -85.577898],
+      "caption": "Catholic church in Altagracia",
+      "url": "./photos/06.JPG",
+      "id": 6
+    },
+    {
+      "coordinates": [11.565972, -85.577734],
+      "caption": "View from Altagracia church",
+      "url": "./photos/07.JPG",
+      "id": 7
+    },
+    {
+      "coordinates": [11.56469, -85.579438],
+      "caption": "Shopping street in Altagracia",
+      "url": "./photos/08.JPG",
+      "id": 8
+    },
+    {
+      "coordinates": [11.559294, -85.577577],
+      "caption": "Main approach to Altagracia",
+      "url": "./photos/09.JPG",
+      "id": 9
+    },
+    {
+      "coordinates": [11.543619, -85.600954],
+      "caption": "View over Ometepe from the slopes of Concepción volcano",
+      "url": "./photos/10.JPG",
+      "id": 10
+    },
+    {
+      "coordinates": [11.541109, -85.616111],
+      "caption": "Gunnera plants near the top of Concepción volcano",
+      "url": "./photos/11.JPG",
+      "id": 11
+    },
+    {
+      "coordinates": [11.538814, -85.620177],
+      "caption": "Concepción volcano crater rim",
+      "url": "./photos/12.JPG",
+      "id": 12
+    },
+    {
+      "coordinates": [11.512364, -85.554325],
+      "caption": "Maderas volcano from Santo Domingo beach",
+      "url": "./photos/13.JPG",
+      "id": 13
+    },
+    {
+      "coordinates": [11.489064, -85.539173],
+      "caption": "Road junction at El Quino",
+      "url": "./photos/15.JPG",
+      "id": 14
+    },
+    {
+      "coordinates": [11.491163, -85.515565],
+      "caption": "Main road through the town of Balgüe",
+      "url": "./photos/16.JPG",
+      "id": 15
+    },
+    {
+      "coordinates": [11.480745, -85.508052],
+      "caption": "Start of one of the trails up Maderas volcano",
+      "url": "./photos/17.JPG",
+      "id": 16
+    },
+    {
+      "coordinates": [11.46369, -85.50826],
+      "caption": "View over northern Ometepe from the slopes of Maderas",
+      "url": "./photos/18.JPG",
+      "id": 17
+    },
+    {
+      "coordinates": [11.455135, -85.509242],
+      "caption": "Muddy conditions in the rainforest on Maderas volcano",
+      "url": "./photos/19.JPG",
+      "id": 18
+    },
+    {
+      "coordinates": [11.446245, -85.511302],
+      "caption": "Inside the crater of Maderas volcano",
+      "url": "./photos/20.JPG",
+      "id": 19
+    },
+    {
+      "coordinates": [11.445935, -85.511453],
+      "caption": "Lake in the crater of Maderas volcano",
+      "url": "./photos/21.JPG",
+      "id": 20
+    },
+    {
+      "coordinates": [11.491377, -85.510167],
+      "caption": "Road leading east out of Balgüe",
+      "url": "./photos/22.JPG",
+      "id": 21
+    },
+    {
+      "coordinates": [11.492144, -85.492735],
+      "caption": "Wooden bridge on the road east of Balgüe",
+      "url": "./photos/23.JPG",
+      "id": 22
+    },
+    {
+      "coordinates": [11.484813, -85.476955],
+      "caption": "Maderas volcano",
+      "url": "./photos/24.JPG",
+      "id": 23
+    },
+    {
+      "coordinates": [11.481695, -85.471374],
+      "caption": "The road through El Corozal village",
+      "url": "./photos/25.JPG",
+      "id": 24
+    },
+    {
+      "coordinates": [11.476084, -85.467836],
+      "caption": "El Corozal primary school",
+      "url": "./photos/26.JPG",
+      "id": 25
+    },
+    {
+      "coordinates": [11.475807, -85.468412],
+      "caption": "Rice fields in El Corozal village",
+      "url": "./photos/27.JPG",
+      "id": 26
+    },
+    {
+      "coordinates": [11.474783, -85.465895],
+      "caption": "Fields in El Corozal village",
+      "url": "./photos/28.JPG",
+      "id": 27
+    },
+    {
+      "coordinates": [11.474402, -85.465748],
+      "caption": "SIFT's clinic in El Corozal village",
+      "url": "./photos/29.JPG",
+      "id": 28
+    },
+    {
+      "coordinates": [11.474233, -85.465693],
+      "caption": "Bus service around Maderas volcano",
+      "url": "./photos/30.JPG",
+      "id": 29
+    },
+    {
+      "coordinates": [11.473781, -85.465422],
+      "caption": "Road past SIFT's clinic in El Corozal",
+      "url": "./photos/31.JPG",
+      "id": 30
+    },
+    {
+      "coordinates": [11.472557, -85.467068],
+      "caption": "Looking down on fields in El Corozal",
+      "url": "./photos/32.JPG",
+      "id": 31
+    },
+    {
+      "coordinates": [11.472505, -85.471469],
+      "caption": "Typical house in El Corozal",
+      "url": "./photos/33.JPG",
+      "id": 32
+    },
+    {
+      "coordinates": [11.473586, -85.473517],
+      "caption": "Fields in El Corozal",
+      "url": "./photos/34.JPG",
+      "id": 33
+    },
+    {
+      "coordinates": [11.431612, -85.464069],
+      "caption": "Entrance to San Pedro village",
+      "url": "./photos/35.JPG",
+      "id": 34
+    },
+    {
+      "coordinates": [11.427906, -85.467084],
+      "caption": "Houses in San Pedro village",
+      "url": "./photos/37.JPG",
+      "id": 35
+    },
+    {
+      "coordinates": [11.428227, -85.466855],
+      "caption": "Beans drying in San Pedro village",
+      "url": "./photos/38.JPG",
+      "id": 36
+    },
+    {
+      "coordinates": [11.425997, -85.469199],
+      "caption": "Footbridge being built in San Pedro",
+      "url": "./photos/39.JPG",
+      "id": 37
+    },
+    {
+      "coordinates": [11.412794, -85.475025],
+      "caption": "Road between San Pedro and Tichana",
+      "url": "./photos/40.JPG",
+      "id": 38
+    },
+    {
+      "coordinates": [11.41351, -85.475634],
+      "caption": "Road between San Pedro and Tichana",
+      "url": "./photos/41.JPG",
+      "id": 39
+    },
+    {
+      "coordinates": [11.414746, -85.540158],
+      "caption": "Palm trees in San Ramon",
+      "url": "./photos/42.JPG",
+      "id": 40
+    },
+    {
+      "coordinates": [11.41545, -85.541032],
+      "caption": "San Ramon waterfront",
+      "url": "./photos/43.JPG",
+      "id": 41
+    },
+    {
+      "coordinates": [11.415937, -85.540272],
+      "caption": "Entrance to San Ramon eco-station",
+      "url": "./photos/44.JPG",
+      "id": 42
+    },
+    {
+      "coordinates": [11.427111, -85.526141],
+      "caption": "Slopes of Maderas volcano",
+      "url": "./photos/45.JPG",
+      "id": 43
+    },
+    {
+      "coordinates": [11.433434, -85.519536],
+      "caption": "San Ramon waterfall",
+      "url": "./photos/46.JPG",
+      "id": 44
+    },
+    {
+      "coordinates": [11.433784, -85.519427],
+      "caption": "San Ramon waterfall",
+      "url": "./photos/47.JPG",
+      "id": 45
+    },
+    {
+      "coordinates": [11.449049, -85.562046],
+      "caption": "Road through Merida",
+      "url": "./photos/48.JPG",
+      "id": 46
+    },
+    {
+      "coordinates": [11.478255, -85.551882],
+      "caption": "Concepción volcano",
+      "url": "./photos/49.JPG",
+      "id": 47
+    },
+    {
+      "coordinates": [11.483694, -85.538712],
+      "caption": "Petroglyph",
+      "url": "./photos/50.JPG",
+      "id": 48
+    },
+    {
+      "coordinates": [11.530145, -85.581811],
+      "caption": "Sintiope primary school",
+      "url": "./photos/51.JPG",
+      "id": 49
+    },
+    {
+      "coordinates": [11.513583, -85.588665],
+      "caption": "Las Pilas primary school",
+      "url": "./photos/52.JPG",
+      "id": 50
+    },
+    {
+      "coordinates": [11.513568, -85.588193],
+      "caption": "Eruption of Concepción volcano from Las Pilas village square",
+      "url": "./photos/53.JPG",
+      "id": 51
+    },
+    {
+      "coordinates": [11.513303, -85.587128],
+      "caption": "SIFT's clinic in Las Pilas",
+      "url": "./photos/54.JPG",
+      "id": 52
+    },
+    {
+      "coordinates": [11.514806, -85.591079],
+      "caption": "Maderas volcano from Las Pilas viewpoint",
+      "url": "./photos/55.JPG",
+      "id": 53
+    },
+    {
+      "coordinates": [11.519065, -85.587917],
+      "caption": "Track between Urbaite and Las Pilas villages",
+      "url": "./photos/56.JPG",
+      "id": 54
+    },
+    {
+      "coordinates": [11.518972, -85.588139],
+      "caption": "Students at the Martin Luther University at the Christian Vocational Centre in Urbaite",
+      "url": "./photos/57.JPG",
+      "id": 55
+    },
+    {
+      "coordinates": [11.520017, -85.587393],
+      "caption": "Belén evangelical church",
+      "url": "./photos/58.JPG",
+      "id": 56
+    },
+    {
+      "coordinates": [11.521578, -85.591162],
+      "caption": "Concepción volcano from Urbaite",
+      "url": "./photos/59.JPG",
+      "id": 57
+    },
+    {
+      "coordinates": [11.524324, -85.587769],
+      "caption": "Urbaite Catholic church",
+      "url": "./photos/60.JPG",
+      "id": 58
+    },
+    {
+      "coordinates": [11.507303, -85.611186],
+      "caption": "Site of landslip from Concepción volcano",
+      "url": "./photos/61.JPG",
+      "id": 59
+    },
+    {
+      "coordinates": [11.507924, -85.611272],
+      "caption": "Site of landslip from Concepción volcano",
+      "url": "./photos/62.JPG",
+      "id": 60
+    },
+    {
+      "coordinates": [11.486061, -85.612467],
+      "caption": "New houses built for victims of Ometepe landslip",
+      "url": "./photos/63.JPG",
+      "id": 61
+    },
+    {
+      "coordinates": [11.490167, -85.599315],
+      "caption": "House in Santa Teresa village",
+      "url": "./photos/64.JPG",
+      "id": 62
+    },
+    {
+      "coordinates": [11.504073, -85.602327],
+      "caption": "Track in Los Ramos village",
+      "url": "./photos/65.JPG",
+      "id": 63
+    },
+    {
+      "coordinates": [11.505922, -85.603136],
+      "caption": "Track through Los Ramos village",
+      "url": "./photos/66.JPG",
+      "id": 64
+    },
+    {
+      "coordinates": [11.495836, -85.624661],
+      "caption": "Quarry near San José del Sur",
+      "url": "./photos/67.JPG",
+      "id": 65
+    },
+    {
+      "coordinates": [11.492106, -85.629232],
+      "caption": "Concepción volcano from near San José del Sur",
+      "url": "./photos/68.JPG",
+      "id": 66
+    },
+    {
+      "coordinates": [11.48102, -85.635025],
+      "caption": "Entrance to Charco Verde",
+      "url": "./photos/69.JPG",
+      "id": 67
+    },
+    {
+      "coordinates": [11.476522, -85.634766],
+      "caption": "Charco Verde lake",
+      "url": "./photos/70.JPG",
+      "id": 68
+    },
+    {
+      "coordinates": [11.485145, -85.640316],
+      "caption": "SIFT's clinic in San José del Sur",
+      "url": "./photos/71.JPG",
+      "id": 69
+    },
+    {
+      "coordinates": [11.488283, -85.643472],
+      "caption": "Concepción volcano from San José del Sur",
+      "url": "./photos/72.JPG",
+      "id": 70
+    },
+    {
+      "coordinates": [11.485624, -85.644875],
+      "caption": "Road through San José del Sur",
+      "url": "./photos/73.JPG",
+      "id": 71
+    },
+    {
+      "coordinates": [11.481553, -85.647782],
+      "caption": "Arriving into San José del Sur port",
+      "url": "./photos/74.JPG",
+      "id": 72
+    },
+    {
+      "coordinates": [11.487553, -85.650566],
+      "caption": "Concepción volcano from San José del Sur",
+      "url": "./photos/75.JPG",
+      "id": 73
+    },
+    {
+      "coordinates": [11.536019, -85.633161],
+      "caption": "Western slopes of Concepción volcano",
+      "url": "./photos/76.JPG",
+      "id": 74
+    },
+    {
+      "coordinates": [11.510614, -85.720318],
+      "caption": "Sand spit at Punta Jesús María",
+      "url": "./photos/77.JPG",
+      "id": 75
+    },
+    {
+      "coordinates": [11.523679, -85.70314],
+      "caption": "Airstrip at Ometepe airport",
+      "url": "./photos/78.JPG",
+      "id": 76
+    },
+    {
+      "coordinates": [11.536109, -85.695432],
+      "caption": "Extension at Moyogalpa hospital",
+      "url": "./photos/79.JPG",
+      "id": 77
+    }
+  ],
+  "photo_spans": [
+    {
+      "start": 0,
+      "end": 20,
+      "id": 0
+    },
+    {
+      "start": 4439,
+      "end": 4445,
+      "id": 0
+    },
+    {
+      "start": 4431,
+      "end": 4439,
+      "id": 1
+    },
+    {
+      "start": 985,
+      "end": 1016,
+      "id": 2
+    },
+    {
+      "start": 1064,
+      "end": 1120,
+      "id": 3
+    },
+    {
+      "start": 1216,
+      "end": 1268,
+      "id": 4
+    },
+    {
+      "start": 1325,
+      "end": 1335,
+      "id": 5
+    },
+    {
+      "start": 1335,
+      "end": 1338,
+      "id": 6
+    },
+    {
+      "start": 1153,
+      "end": 1156,
+      "id": 7
+    },
+    {
+      "start": 1338,
+      "end": 1344,
+      "id": 8
+    },
+    {
+      "start": 1347,
+      "end": 1358,
+      "id": 9
+    },
+    {
+      "start": 1438,
+      "end": 1492,
+      "id": 10
+    },
+    {
+      "start": 1760,
+      "end": 1792,
+      "id": 10
+    },
+    {
+      "start": 1528,
+      "end": 1585,
+      "id": 11
+    },
+    {
+      "start": 1653,
+      "end": 1706,
+      "id": 11
+    },
+    {
+      "start": 495,
+      "end": 533,
+      "id": 12
+    },
+    {
+      "start": 1600,
+      "end": 1631,
+      "id": 12
+    },
+    {
+      "start": 2071,
+      "end": 2126,
+      "id": 13
+    },
+    {
+      "start": 3514,
+      "end": 3540,
+      "id": 13
+    },
+    {
+      "start": 2134,
+      "end": 2142,
+      "id": 14
+    },
+    {
+      "start": 3460,
+      "end": 3465,
+      "id": 14
+    },
+    {
+      "start": 2195,
+      "end": 2211,
+      "id": 15
+    },
+    {
+      "start": 2241,
+      "end": 2255,
+      "id": 16
+    },
+    {
+      "start": 2305,
+      "end": 2321,
+      "id": 17
+    },
+    {
+      "start": 2452,
+      "end": 2462,
+      "id": 17
+    },
+    {
+      "start": 2331,
+      "end": 2369,
+      "id": 18
+    },
+    {
+      "start": 2411,
+      "end": 2435,
+      "id": 18
+    },
+    {
+      "start": 2374,
+      "end": 2381,
+      "id": 19
+    },
+    {
+      "start": 2381,
+      "end": 2392,
+      "id": 20
+    },
+    {
+      "start": 2563,
+      "end": 2574,
+      "id": 21
+    },
+    {
+      "start": 2602,
+      "end": 2613,
+      "id": 22
+    },
+    {
+      "start": 2637,
+      "end": 2646,
+      "id": 23
+    },
+    {
+      "start": 2650,
+      "end": 2659,
+      "id": 24
+    },
+    {
+      "start": 2659,
+      "end": 2663,
+      "id": 25
+    },
+    {
+      "start": 2663,
+      "end": 2666,
+      "id": 26
+    },
+    {
+      "start": 2666,
+      "end": 2669,
+      "id": 27
+    },
+    {
+      "start": 2669,
+      "end": 2673,
+      "id": 28
+    },
+    {
+      "start": 2673,
+      "end": 2677,
+      "id": 30
+    },
+    {
+      "start": 2765,
+      "end": 2771,
+      "id": 34
+    },
+    {
+      "start": 2775,
+      "end": 2779,
+      "id": 35
+    },
+    {
+      "start": 2779,
+      "end": 2783,
+      "id": 37
+    },
+    {
+      "start": 2817,
+      "end": 2827,
+      "id": 38
+    },
+    {
+      "start": 2827,
+      "end": 2838,
+      "id": 39
+    },
+    {
+      "start": 3024,
+      "end": 3029,
+      "id": 40
+    },
+    {
+      "start": 3029,
+      "end": 3036,
+      "id": 41
+    },
+    {
+      "start": 3250,
+      "end": 3261,
+      "id": 41
+    },
+    {
+      "start": 3036,
+      "end": 3042,
+      "id": 42
+    },
+    {
+      "start": 3245,
+      "end": 3250,
+      "id": 42
+    },
+    {
+      "start": 3096,
+      "end": 3115,
+      "id": 43
+    },
+    {
+      "start": 3169,
+      "end": 3184,
+      "id": 43
+    },
+    {
+      "start": 3135,
+      "end": 3140,
+      "id": 44
+    },
+    {
+      "start": 3145,
+      "end": 3150,
+      "id": 44
+    },
+    {
+      "start": 3140,
+      "end": 3145,
+      "id": 45
+    },
+    {
+      "start": 3353,
+      "end": 3365,
+      "id": 46
+    },
+    {
+      "start": 3413,
+      "end": 3426,
+      "id": 47
+    },
+    {
+      "start": 3440,
+      "end": 3447,
+      "id": 48
+    },
+    {
+      "start": 3695,
+      "end": 3706,
+      "id": 49
+    },
+    {
+      "start": 3735,
+      "end": 3737,
+      "id": 50
+    },
+    {
+      "start": 3741,
+      "end": 3744,
+      "id": 51
+    },
+    {
+      "start": 3737,
+      "end": 3741,
+      "id": 52
+    },
+    {
+      "start": 3750,
+      "end": 3753,
+      "id": 54
+    },
+    {
+      "start": 3725,
+      "end": 3728,
+      "id": 55
+    },
+    {
+      "start": 3753,
+      "end": 3755,
+      "id": 56
+    },
+    {
+      "start": 3723,
+      "end": 3725,
+      "id": 56
+    },
+    {
+      "start": 3780,
+      "end": 3787,
+      "id": 57
+    },
+    {
+      "start": 3772,
+      "end": 3776,
+      "id": 58
+    },
+    {
+      "start": 3837,
+      "end": 3840,
+      "id": 59
+    },
+    {
+      "start": 3973,
+      "end": 3975,
+      "id": 60
+    },
+    {
+      "start": 3881,
+      "end": 3888,
+      "id": 61
+    },
+    {
+      "start": 3917,
+      "end": 3921,
+      "id": 62
+    },
+    {
+      "start": 3950,
+      "end": 3953,
+      "id": 63
+    },
+    {
+      "start": 3953,
+      "end": 3959,
+      "id": 64
+    },
+    {
+      "start": 3994,
+      "end": 4000,
+      "id": 65
+    },
+    {
+      "start": 4010,
+      "end": 4018,
+      "id": 66
+    },
+    {
+      "start": 4044,
+      "end": 4047,
+      "id": 67
+    },
+    {
+      "start": 4111,
+      "end": 4114,
+      "id": 67
+    },
+    {
+      "start": 4094,
+      "end": 4099,
+      "id": 68
+    },
+    {
+      "start": 4129,
+      "end": 4134,
+      "id": 69
+    },
+    {
+      "start": 4138,
+      "end": 4143,
+      "id": 70
+    },
+    {
+      "start": 4143,
+      "end": 4146,
+      "id": 71
+    },
+    {
+      "start": 4152,
+      "end": 4162,
+      "id": 72
+    },
+    {
+      "start": 4178,
+      "end": 4185,
+      "id": 73
+    },
+    {
+      "start": 430,
+      "end": 495,
+      "id": 74
+    },
+    {
+      "start": 533,
+      "end": 618,
+      "id": 74
+    },
+    {
+      "start": 4332,
+      "end": 4340,
+      "id": 75
+    },
+    {
+      "start": 4384,
+      "end": 4391,
+      "id": 76
+    },
+    {
+      "start": 4416,
+      "end": 4422,
+      "id": 77
+    }
+  ]
+}
