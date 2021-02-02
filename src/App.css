@@ -424,4 +424,8 @@ input[type='number'] {
     left: 13px;
     top: calc(25vh + 17px);
   }
+
+  .popup_icon {
+    display: none;
+  }
 }
