@@ -467,8 +467,12 @@ export default () => {
           doubleClickZoom={false}
           onmoveend={onMove.bind(this)}
         >
-          <TileLayer
+          {/* <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors &bull; <a target="_blank" href="https://icons8.com/icons/set/walking">Walking</a>, <a target="_blank" href="https://icons8.com/icons/set/image">Image</a> icons by <a target="_blank" href="https://icons8.com">Icons8</a>'
+          /> */}
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors &bull; <a target="_blank" href="https://icons8.com/icons/set/walking">Walking</a>, <a target="_blank" href="https://icons8.com/icons/set/image">Image</a> icons by <a target="_blank" href="https://icons8.com">Icons8</a>'
           />
           <GeoJSON data={getGeoJSON()} style={styleRoute} />
