@@ -59,22 +59,23 @@ body {
   /* overflow-y: scroll; */
 }
 
-#summary_stats {
+#elevation_chart {
   width: 100%;
-  height: 15rem;
-  background-color: darkblue;
-  flex: 1;
+  height: 20vh;
+  background-color: gainsboro;
 }
 
-#ctrl_buttons {
-  padding-left: 2.5%;
-  width: 95%;
+#summary_stats {
+  width: 100%;
+  height: 11rem;
+  background-color: darkblue;
+  flex: 1;
 }
 
 #monitor {
   overflow-y: scroll;
   overflow-anchor: none;
-  height: calc(100vh - 15rem);
+  height: calc(80vh - 11rem);
 }
 
 .summary_row {
@@ -94,7 +95,7 @@ body {
 }
 
 .summary_title {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 700;
   text-align: center;
   color: white;
@@ -119,7 +120,7 @@ body {
 }
 
 .md_summary {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
   flex-grow: 1;
   -webkit-flex-grow: 1;
@@ -129,7 +130,7 @@ body {
 }
 
 .lg_summary {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
   flex-grow: 1;
   -webkit-flex-grow: 1;
@@ -305,12 +306,17 @@ input[type='number'] {
 
   #summary_stats {
     width: 100%;
-    height: 25vh;
+    height: 9rem;
   }
 
   #monitor {
     width: 100%;
-    height: 20vh;
+    height: calc((45vh - 9rem) / 2);
+  }
+
+  #elevation_chart {
+    width: 100%;
+    height: calc((45vh - 9rem) / 2);
   }
 
   .close_photo img {
@@ -341,7 +347,7 @@ input[type='number'] {
 
   .md_summary,
   .lg_summary {
-    font-size: 1.25em;
+    font-size: 1.1em;
   }
 
   .popup_photo {
@@ -373,6 +379,27 @@ input[type='number'] {
 @media only screen and (max-width: 360px) {
   .locn_dist {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1002px) {
+  #elevation_chart {
+    width: 100%;
+    height: 20vh;
+    background-color: gainsboro;
+  }
+  
+  #summary_stats {
+    width: 100%;
+    height: 15rem;
+    background-color: darkblue;
+    flex: 1;
+  }
+  
+  #monitor {
+    overflow-y: scroll;
+    overflow-anchor: none;
+    height: calc(80vh - 15rem);
   }
 }
 

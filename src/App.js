@@ -6,6 +6,8 @@ import { features } from './Ometepe_100_mile_route.json'
 import { photos, photo_spans } from './Popup_Photos.json'
 import L from 'leaflet'
 
+import { FlexibleXYPlot, AreaSeries } from 'react-vis'
+
 // Firebase configuration
 import initFirebase from './firebase'
 import firebase from 'firebase/app'
@@ -134,6 +136,47 @@ export default () => {
     return dist_data
   }
 
+  const createElevations = () => {
+    const base_data = features[0].geometry.coordinates
+    let asc_data = []
+    let desc_data = []
+    let total_asc = 0
+    let total_desc = 0
+    let total_dist = 0
+    let seg_dist = 0
+    for (let i = 1; i < base_data.length; i++) {
+      seg_dist = calculateDist(
+        base_data[i - 1][0],
+        base_data[i - 1][1],
+        base_data[i][0],
+        base_data[i][1]
+      )
+      if (base_data[i][2] >= base_data[i - 1][2]) {
+        total_asc += base_data[i][2] - base_data[i - 1][2]
+        asc_data.push({
+          elev_start: base_data[i - 1][2],
+          elev_end: base_data[i][2],
+          dist_start: total_dist,
+          dist_end: total_dist + seg_dist,
+          // dist: seg_dist,
+          asc_total: total_asc
+        })
+      } else {
+        total_desc += base_data[i - 1][2] - base_data[i][2]
+        desc_data.push({
+          elev_start: base_data[i - 1][2],
+          elev_end: base_data[i][2],
+          dist_start: total_dist,
+          dist_end: total_dist + seg_dist,
+          // dist: seg_dist,
+          desc_total: total_desc
+        })
+      }
+      total_dist += seg_dist
+    }
+    return [asc_data, desc_data, total_asc, total_dist]
+  }
+
   const populateStages = () => {
     let stgs = []
     let prev_dist = 0
@@ -155,16 +198,60 @@ export default () => {
       (span) => leg >= span.start && leg < span.end
     )
     const p_id = p_idx !== -1 ? photo_spans[p_idx].id : -1
-    console.log(p_id)
     setCurrentPhoto(p_id)
   }
+
+  const processElevNodes = (filtered_nodes) => {
+    let output = []
+    let prev_x = 0
+    if (filtered_nodes.length > 0) {
+      prev_x = filtered_nodes[0].dist_start
+      output.push({ x: prev_x, y: 0 })
+      output.push({ x: prev_x, y: filtered_nodes[0].elev_start })
+    }
+    for (let node of filtered_nodes) {
+      if (prev_x !== node.dist_start) {
+        // Discontinuity
+        output.push({ x: prev_x, y: 0 })
+        output.push({ x: node.dist_start, y: 0 })
+        output.push({ x: node.dist_start, y: node.elev_start })
+      }
+      output.push({ x: node.dist_end, y: node.elev_end })
+      prev_x = node.dist_end
+    }
+    output.push({ x: prev_x, y: 0 })
+    return output
+  }
+
+  const getPendingAscNodes = (cur_elev) => {
+    return processElevNodes(ascents.filter((asc) => asc.asc_total > cur_elev))
+  }
+
+  const getPendingDescNodes = (cur_elev) => {
+    return processElevNodes(descents.filter((desc) => desc.desc_total > cur_elev))
+  }
+
+  const getCompleteAscNodes = (cur_elev) => {
+    return processElevNodes(ascents.filter((asc) => asc.asc_total <= cur_elev))
+  }
+
+  const getCompleteDescNodes = (cur_elev) => {
+    return processElevNodes(descents.filter((desc) => desc.desc_total <= cur_elev))
+  }
+
+  const [ascents, descents, FULL_ASC_ELEV, FULL_DIST] = createElevations()
 
   // eslint-disable-next-line
   const [route, setRoute] = useState(() => createRoute())
   const [lat, setLat] = useState(route[0][1])
   const [long, setLong] = useState(route[0][0])
   const [dist, setDist] = useState(0)
+  const [elev, setElev] = useState(0)
   const [tick, setTick] = useState(0)
+  const [pendingAsc, setPendingAsc] = useState(() => getPendingAscNodes(0))
+  const [pendingDesc, setPendingDesc] = useState(() => getPendingDescNodes(0))
+  const [completeAsc, setCompleteAsc] = useState(() => getCompleteAscNodes(0))
+  const [completeDesc, setCompleteDesc] = useState(() => getCompleteDescNodes(0))
   const [curStage, setCurStage] = useState(0)
   const [legDirection, setLegDirection] = useState('east')
   const [startTick, setStartTick] = useState(0)
@@ -231,7 +318,6 @@ export default () => {
   // Scroll destination list to current route leg on first load only
   useEffect(() => {
     if (document.getElementsByClassName('table_row current_row').length > 0) {
-      console.log('Here')
       document
         .getElementsByClassName('table_row current_row')[0]
         .scrollIntoView()
@@ -275,6 +361,10 @@ export default () => {
     return metres.toLocaleString('en') + 'm'
   }
 
+  const formatPercentage = (percentage) => {
+    return (100 * percentage).toFixed(1) + '%'
+  }
+
   useEffect(() => {
     // eslint-disable-next-line
     const unsubscribe = stat_doc.onSnapshot((snapshot) => {
@@ -299,6 +389,12 @@ export default () => {
         setTick(cur_data.tick)
         setStartTick(cur_data.start_tick)
         setCurStage(cur_data.cur_stage)
+        setElev(cur_data.elev)
+        setPendingAsc(getPendingAscNodes(cur_data.elev))
+        setPendingDesc(getPendingDescNodes(cur_data.elev))
+        setCompleteAsc(getCompleteAscNodes(cur_data.elev))
+        setCompleteDesc(getCompleteDescNodes(cur_data.elev))
+
         // Populate stages data
         let new_stages = []
         new_stages = stages.map((stage, index) => {
@@ -381,9 +477,9 @@ export default () => {
           ) : (
             <Marker position={[lat, long]} icon={walkingWestIcon}></Marker>
           )}
-          {photos.map((photo) => {
+          {photos.map((photo, index) => {
             return (
-              <Marker zIndexOffset={15000} position={photo.coordinates}>
+              <Marker zIndexOffset={15000} position={photo.coordinates} key={"marker_"+index}>
                 <Popup>
                   <div>
                     <div className="popup_header">
@@ -479,18 +575,22 @@ export default () => {
         <div id="summary_stats">
           <h1 className="summary_title">SIFT's Ometepe Odyssey</h1>
           <div id="total_dist" className="summary_row">
-            <div className="md_summary">Distance: </div>
+            <div className="md_summary">Walked on treadmill: </div>
             <div className="lg_summary">
-              {formatDistAsMetres(parseInt(dist))}
+              {formatDistAsMetres(parseInt(dist))} (
+              {formatPercentage(parseInt(dist) / FULL_DIST)})
             </div>
           </div>
           <div id="total_time" className="summary_row">
-            <div className="md_summary">Time: </div>
+            <div className="md_summary">Walking time: </div>
             <div className="lg_summary">{formatTime(tick)}</div>
           </div>
-          <div id="cur_speed" className="summary_row">
-            <div className="md_summary">Speed: </div>
-            <div className="lg_summary">{speed}kph</div>
+          <div id="total_elev" className="summary_row">
+            <div className="md_summary">Climbed on stairs: </div>
+            <div className="lg_summary">
+              {formatDistAsMetres(parseInt(elev))} (
+              {formatPercentage(elev / FULL_ASC_ELEV)})
+            </div>
           </div>
           <h2 className="sponsor_details">
             Please{' '}
@@ -535,6 +635,34 @@ export default () => {
               </div>
             )
           })}
+        </div>
+        <div id="elevation_chart">
+          <FlexibleXYPlot margin={{ left: 0, right: 0, top: 10, bottom: 0 }}>
+            <AreaSeries
+              className="pending-asc-series"
+              data={pendingAsc}
+              color="orange"
+              stroke="orange"
+            />
+            <AreaSeries
+              className="pending-desc-series"
+              data={pendingDesc}
+              color="orange"
+              stroke="orange"
+            />
+            <AreaSeries
+              className="complete-asc-series"
+              data={completeAsc}
+              color="limegreen"
+              stroke="none"
+            />
+            <AreaSeries
+              className="complete-desc-series"
+              data={completeDesc}
+              color="limegreen"
+              stroke="none"
+            />
+          </FlexibleXYPlot>
         </div>
       </div>
     </div>
