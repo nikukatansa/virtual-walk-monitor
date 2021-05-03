@@ -6,8 +6,6 @@ import { features } from './Ometepe_100_mile_route.json'
 import { photos, photo_spans } from './Popup_Photos.json'
 import L from 'leaflet'
 
-import { FlexibleXYPlot, AreaSeries } from 'react-vis'
-
 // Firebase configuration
 import initFirebase from './firebase'
 import firebase from 'firebase/app'
@@ -174,7 +172,7 @@ export default () => {
       }
       total_dist += seg_dist
     }
-    return [asc_data, desc_data, total_asc, total_dist]
+    return [total_asc, total_dist]
   }
 
   const populateStages = () => {
@@ -201,45 +199,7 @@ export default () => {
     setCurrentPhoto(p_id)
   }
 
-  const processElevNodes = (filtered_nodes) => {
-    let output = []
-    let prev_x = 0
-    if (filtered_nodes.length > 0) {
-      prev_x = filtered_nodes[0].dist_start
-      output.push({ x: prev_x, y: 0 })
-      output.push({ x: prev_x, y: filtered_nodes[0].elev_start })
-    }
-    for (let node of filtered_nodes) {
-      if (prev_x !== node.dist_start) {
-        // Discontinuity
-        output.push({ x: prev_x, y: 0 })
-        output.push({ x: node.dist_start, y: 0 })
-        output.push({ x: node.dist_start, y: node.elev_start })
-      }
-      output.push({ x: node.dist_end, y: node.elev_end })
-      prev_x = node.dist_end
-    }
-    output.push({ x: prev_x, y: 0 })
-    return output
-  }
-
-  const getPendingAscNodes = (cur_elev) => {
-    return processElevNodes(ascents.filter((asc) => asc.asc_total > cur_elev))
-  }
-
-  const getPendingDescNodes = (cur_elev) => {
-    return processElevNodes(descents.filter((desc) => desc.desc_total > cur_elev))
-  }
-
-  const getCompleteAscNodes = (cur_elev) => {
-    return processElevNodes(ascents.filter((asc) => asc.asc_total <= cur_elev))
-  }
-
-  const getCompleteDescNodes = (cur_elev) => {
-    return processElevNodes(descents.filter((desc) => desc.desc_total <= cur_elev))
-  }
-
-  const [ascents, descents, FULL_ASC_ELEV, FULL_DIST] = createElevations()
+  const [FULL_ASC_ELEV, FULL_DIST] = createElevations()
 
   // eslint-disable-next-line
   const [route, setRoute] = useState(() => createRoute())
@@ -248,10 +208,6 @@ export default () => {
   const [dist, setDist] = useState(0)
   const [elev, setElev] = useState(0)
   const [tick, setTick] = useState(0)
-  const [pendingAsc, setPendingAsc] = useState(() => getPendingAscNodes(0))
-  const [pendingDesc, setPendingDesc] = useState(() => getPendingDescNodes(0))
-  const [completeAsc, setCompleteAsc] = useState(() => getCompleteAscNodes(0))
-  const [completeDesc, setCompleteDesc] = useState(() => getCompleteDescNodes(0))
   const [curStage, setCurStage] = useState(0)
   const [legDirection, setLegDirection] = useState('east')
   const [startTick, setStartTick] = useState(0)
@@ -390,10 +346,6 @@ export default () => {
         setStartTick(cur_data.start_tick)
         setCurStage(cur_data.cur_stage)
         setElev(cur_data.elev)
-        setPendingAsc(getPendingAscNodes(cur_data.elev))
-        setPendingDesc(getPendingDescNodes(cur_data.elev))
-        setCompleteAsc(getCompleteAscNodes(cur_data.elev))
-        setCompleteDesc(getCompleteDescNodes(cur_data.elev))
 
         // Populate stages data
         let new_stages = []
@@ -483,7 +435,11 @@ export default () => {
           )}
           {photos.map((photo, index) => {
             return (
-              <Marker zIndexOffset={15000} position={photo.coordinates} key={"marker_"+index}>
+              <Marker
+                zIndexOffset={15000}
+                position={photo.coordinates}
+                key={'marker_' + index}
+              >
                 <Popup>
                   <div>
                     <div className="popup_header">
@@ -641,32 +597,10 @@ export default () => {
           })}
         </div>
         <div id="elevation_chart">
-          <FlexibleXYPlot margin={{ left: 0, right: 0, top: 10, bottom: 0 }}>
-            <AreaSeries
-              className="pending-asc-series"
-              data={pendingAsc}
-              color="orange"
-              stroke="orange"
-            />
-            <AreaSeries
-              className="pending-desc-series"
-              data={pendingDesc}
-              color="orange"
-              stroke="orange"
-            />
-            <AreaSeries
-              className="complete-asc-series"
-              data={completeAsc}
-              color="limegreen"
-              stroke="none"
-            />
-            <AreaSeries
-              className="complete-desc-series"
-              data={completeDesc}
-              color="limegreen"
-              stroke="none"
-            />
-          </FlexibleXYPlot>
+          <img
+            alt="Elevation chart"
+            src={'./elevs/' + Math.floor((100 * elev) / FULL_ASC_ELEV) + '.svg'}
+          />
         </div>
       </div>
     </div>
